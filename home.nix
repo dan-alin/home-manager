@@ -21,8 +21,7 @@
     pkgs.eza
     pkgs.gitui
     pkgs.ripgrep
-    pkgs.rustc
-    pkgs.cargo
+    pkgs.rustup
     pkgs.nerd-fonts.jetbrains-mono
   ];
 
@@ -76,7 +75,6 @@
     ".warp".source = ./.warp;
   };
 
-    
 
   home.sessionVariables = {
      EDITOR = "nvim";
@@ -85,15 +83,24 @@
   programs.home-manager.enable = true;
 
   home.activation = {
-  configure-volta = ''
-    echo "Running Volta configuration..."
-    export VOLTA_HOME="$HOME/.volta"
-    export PATH="$VOLTA_HOME/bin:/Users/dan-alin/.nix-profile/bin:$PATH"
+
+    configure-rustup = ''
+      echo "Setting rustup default toolchain..."
+      export PATH="$HOME/.nix-profile/bin:$PATH"
+      rustup default stable
+      echo "Rustup configuration completed."
+    '';
+
+    configure-volta = ''
+      echo "Running Volta configuration..."
+      export VOLTA_HOME="$HOME/.volta"
+      export PATH="$VOLTA_HOME/bin:/Users/dan-alin/.nix-profile/bin:$PATH"
     
-    volta install node
-    volta install npm
-    volta install pnpm
-    echo "Volta configuration completed."
-  '';
-};
+      volta install node
+      volta install npm
+      volta install pnpm
+      echo "Volta configuration completed."
+    '';
+  };
+
 }
