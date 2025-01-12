@@ -22,6 +22,7 @@
     pkgs.gitui
     pkgs.ripgrep
     pkgs.rustup
+    pkgs.helix
     pkgs.nerd-fonts.jetbrains-mono
   ];
 
@@ -72,7 +73,9 @@
 
     ".config/nvim".source = ./nvim;
 
-    ".warp".source = ./.warp;
+    ".warp".source = ./warp;
+
+    ".config/helix".source = ./helix;
   };
 
 
